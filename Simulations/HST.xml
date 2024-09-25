@@ -1,0 +1,32 @@
+<mujocoinclude>
+    <body name="Satellite" pos="0 0.7 0.396">
+        <inertial pos="0.003 0 0.016" quat="0.504234 0.49623 0.49523 0.504234" mass="0.3" diaginertia="0.001 0.001 0.001" />
+<!--        <joint name="WRJ1" pos="0 0 0" axis="0 1 0" range="-0.524 0.175" armature="0.005" damping="0.5" user="1123" />-->
+<!--        <geom name="Satellite_2" class="Satellite" mesh="Satellite" />-->
+<!--        <geom name="C_wrist" class="DC_Hand" size="0.015 0.01" quat="0.707107 0.707107 0 0" type="capsule" rgba="0.4 0.5 0.6 0.1" />-->
+
+
+
+<!--        <body name="frame" pos="-0.107339 0.0435293 0.447376" user="1001 0 2002 -0.4 -0.1 0.252 0 0.3 0.45">-->
+<!--            <inertial pos="0.006 0 0.036" quat="0.715833 0.0439898 0.0749825 0.692839" mass="0.3" diaginertia="0.001 0.001 0.001" />-->
+<!--&lt;!&ndash;            <geom size="0.04 0.2" pos="0.6 0 0" type="cylinder" material="MatWood"  />&ndash;&gt;-->
+<!--&lt;!&ndash;            <geom size="0.04 0.2" pos="-0.02 0 0" type="cylinder" material="MatWood"  />&ndash;&gt;-->
+<!--            <site name="S_handle_target" pos="0.75 -0.5 -.18" size="0.025" group='3'/>-->
+<!--            <body name="door" pos="0.6 -1.3 -0.3" euler="2.5 4.7 3">-->
+<!--                <inertial pos="0.0296816 -0.00152345 0" quat="0.701072 0 0 0.713091" mass="2.43455" diaginertia="0.0913751 0.0521615 0.043714" />-->
+<!--                <joint name="door_hinge" pos="0.31 0 0" axis="0 0 1" range="0 1.57" damping="1" frictionloss="2" />-->
+<!--                <geom size="0.2 0.04 0.2" type="box" friction="1 1 1" material="MatWood" />-->
+<!--                <geom size="0.04 0.2" pos="0.2 0 0" type="cylinder" material="MatWood" />-->
+<!--                <geom size="0.04 0.2" pos="-0.2 0 0" type="cylinder" material="MatWood" />-->
+<!--                <body name="latch" pos="-0.15 0 -0.025">-->
+<!--                    <inertial pos="-0.017762 0.0138544 0" quat="0.365653 0.605347 -0.36522 0.605365" mass="3.53743" diaginertia="0.0483771 0.0410001 0.0111013" />-->
+<!--&lt;!&ndash;                    <joint name="latch" pos="0 0 0" axis="0 1 0" range="0 1.8" frictionloss="5" />&ndash;&gt;-->
+<!--&lt;!&ndash;                    <geom size="0.05 0.15" quat="0.707388 0.706825 0 0" type="cylinder" material="MatFoil" />&ndash;&gt;-->
+<!--                    <geom size="0.02 0.1" pos="0.1 -0.15 0" quat="0.707388 10 0.706825 0" type="capsule" material="MatFoil" />-->
+<!--&lt;!&ndash;                    <geom size="0.04 0.07" pos="-0.1 0.1 0" quat="0.707388 0 0.706825 0" type="capsule" material="MatFoil" />&ndash;&gt;-->
+<!--                    <site name="S_handle" pos="0.15 -0.15 0" size="0.025" group='3'/>-->
+<!--                </body>-->
+<!--            </body>-->
+<!--        </body>-->
+    </body>
+</mujocoinclude>

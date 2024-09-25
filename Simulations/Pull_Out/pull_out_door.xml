@@ -1,0 +1,141 @@
+<!-- ======================================================
+    Model       :: ADROIT Door
+ 
+    Mujoco      :: Advanced physics simulation engine
+        Source      : www.roboti.us
+        Version     : 1.50
+        Released    : 17Jan'17
+        
+    Author      :: Vikash Kumar
+        Contacts    : vikash@cs.washington.edu
+        Last edits  : 17Jan'17
+
+    Designed for :: Demo Augmented Policy Gradient (DAPG)
+
+    Copyright   :: Vikash Kumar
+        Licensed under Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+====================================================== -->
+
+<mujoco model='ADROIT-door(v1.5)'>
+
+    <!-- ======= WORLD ======= -->
+    <worldbody>
+        <light directional='false' diffuse='.7 .7 .7' specular='0.03 0.03 0.03' pos='-1 -1.0 4.0' dir='1 1.0 -4'/>
+<!--        <geom name='ground' size="1.5 1.5 0.25" pos="0 0 -1" type="plane" contype="1" conaffinity="0" material="groundplane" />-->
+        <camera name="fixed" pos="0.9 -0.7 0.7" quat="0.92388 0.382683 0 0" />
+        <!-- Camera for the VIL paper -->
+        <camera name="vil_camera" pos="0 -1.2 1.2" quat="0.92388 0.382683 0 0" />
+
+        <!-- ======= MOCAP ======= -->
+        <body name="vive_tracker" pos="0 -0.35 0.25" mocap="true">
+            <inertial pos="0 0 0" mass="0.064" diaginertia="1.70667e-05 1.70667e-05 1.70667e-05" />
+            <geom size="0.03 0.01" type="cylinder" contype="0" conaffinity="0" group="3" rgba="0.3 0.3 0.3 0.3" />
+        </body>
+
+        <!-- ======= HAND ======= -->
+        <body name="forearm" pos="-0.29 -0.701 0.775" euler="-1.57 -0.477 1.6">
+            <inertial pos="0.001 -0.002 0.29" mass="4"/>
+
+            <joint name="ARTz" pos="0 0 0" axis="0 0 1" type="slide" range="-5 5" damping="100"/>
+<!--            <joint name="ARTz_side" pos="0 0 0" axis="0 1 0" type="slide" range="-0.5 0" damping="20" />-->
+<!--            <joint name="ARRx" pos="0 0 0" axis="1 0 0" range="-1.5 0" damping="20" />-->
+<!--            <joint name="ARRy" pos="0 0 0" axis="0 -1 0" range="0 0.3" damping="20" />-->
+<!--            <joint name="ARRx" pos="0 0 0" axis="-1 0 0" range="0 0.5" damping="20" />-->
+<!--            <joint name="ARRz" pos="0 0 0" axis="0 0 1" range="0 2" damping="20" />-->
+            <geom name="V_forearm" class="D_Vizual" pos="0 -.01 .181" euler="0 0 -1.57"  mesh="forearm_simple"  />
+            <geom name="C_forearm1" class="DC_Hand" size="0.05 0.033" pos="0 0 0.29" type="capsule" rgba="0.4 0.5 0.6 0.1" />
+
+            <!-- ======= Adroit ======= -->
+            <include file="pull_out_model.xml"/>
+        </body>
+
+        <!-- ======= Satellite ======= -->
+        <body name="satelite" pos="0.2 0.97 -0.9" euler="2.33 4.6 3.14" >
+            <inertial pos="0 0 0" mass="40"/>
+            <geom name="Satellite" class="Satellite" pos="0 -.5 .2" euler="10 10 -11.57"  mesh="Satellite" size="0.05 0.25"/>
+
+            <body name="frame" pos="-0.107339 0.0435293 0.447376" user="1001 0 2002 -0.4 -0.1 0.252 0 0.3 0.45" axisangle="0 0 1 -0.8">
+            <geom size="0.02 0.2" pos="1.68 -0.88 0.23" type="cylinder" material="MatWood" euler="-0.1 4.63 0"/>
+            <geom size="0.02 0.2" pos="1.72 -0.93 -0.23" type="cylinder" material="MatWood" euler="-0.1 4.63 0"/>
+<!--            <site name="S_handle_target" pos="0.75 -0.5 -.18" size="0.025" group='3'/>-->
+            <body name="door" pos="1.7 -0.9 0" euler="-0.1 4.63 0">
+<!--                <geom size="0.01 0.2" pos="0.2 0 0" type="cylinder" material="MatWood" />-->
+<!--                <geom size="0.01 0.2" pos="-0.2 0 0" type="cylinder" material="MatWood" />-->
+                <body name="door_main" pos="0.4 -0.2 0" euler="0 0 2.5">
+                <inertial pos="0 0 0" mass="2"/>
+<!--                <joint name="door_hinge" pos="0.31 0 0" axis="0 0 1" range="0 1.57" damping="1" frictionloss="2" />-->
+                <geom size="0.2 0.01 0.2" type="box" friction="1 1 1" material="MatWood" name="door"/>
+                <body name="latch" pos="-0.2 0.03 -0.025" euler="0.15 0 0">
+                   <geom size="0.01 0.06" pos="0.1 -0.08 0" quat="0.707388 0.706825 0 0" type="cylinder" material="MatFoil" />
+                    <geom size="0.01 0.1" pos="0.1 -0.14 0" quat="0.707388 10 0.706825 0" type="capsule" material="MatFoil" />
+                    <geom size="0.01 0.05" pos="0.1 -0.03 0" quat="0.707388 0 0.706825 0" type="capsule" material="MatFoil" />
+
+<!--                    <site name="S_handle" pos="0.15 -0.15 0" size="0.025" group='3'/>-->
+                </body>
+                <body name="si_unit" pos="0 0.03 -0.01" euler="0 0 0">
+                    <joint name="si_unit" pos="0 0 0" axis="0 1 0" type="slide" range="0 1" damping="100" limited="true"/>
+                    <geom size="0.16 0.03 0.16" type="box" rgba="0.5 0.5 0.5 0.5" name="si_unit" pos="0 0.007 0"/>
+                    <body name="si_unit_handle" euler="0 1.56 0" pos="0.15 0.03 -0.03">
+                            <geom size="0.007 0.013" pos="-0.025 0.01 -0.15" euler="1.58 0 0" type="cylinder" name="si_unit_handle_1" />
+                            <geom size="0.007 0.013" pos="0.025 0.01 -0.15" euler="1.58 0 0" type="cylinder" name="si_unit_handle_2" />
+                            <geom size="0.007 0.025" pos="0 0.027 -0.149" euler="0 1.57 0" type="capsule" name="si_unit_handle_3"/>
+                            <geom size="0.02 0.0001 0.01" pos="0 0.01 -0.15" euler="1.58 0 0" type="box" name="box_handle" friction="1 1 1"/>
+                            <geom size="0.006 0.07" pos="0 0 -0.15" euler="0 1.58 0" type="capsule"/>
+                            <site name="S_si_unit_handle" pos="0 0.012 -0.15" size="0.009 0 0" group='3' rgba="0 0 0 0"/>
+                    </body>
+                    <body pos="0 0.02 0">
+                        <geom pos="0 0 0.12" euler="0 0 1.57" class="bolt" mesh="bolt" />
+                        <body>
+<!--                            <site name="S_nut" pos="0.012 0.001 0.17" size="0.005 0 0" group='3'/>-->
+<!--                            <site name="S_nut_2" pos="-0.012 0.001 0.17" size="0.005 0 0" group='3'/>-->
+                            <geom pos="0 0 0.15" euler="0 0 0" class="nut" mesh="nut"/>
+<!--                            <joint name="nut_downwards" pos="0 0 0" axis="0 0 1" type="slide" range="0 0.172" damping="20" />-->
+<!--                            <joint name="nut_around" pos="0 0 0" axis="0 0 1" range="-1 2" damping="20" />-->
+                        </body>
+                        <body pos="0.12 0.02 -0.1" euler="0 0 0">
+                            <geom size="0.001 0.001 0.001" pos="0 -0.05 0" type="box" friction="1 1 1" rgba="0.5 0.5 0.5 0.5"  name="screw_box"/>
+                            <site name="S_door" pos="0 0 0" size="0.004 0 0" group='3' rgba="0 0 0 0"/>
+                            <body name="screw">
+                                <site name="S_screw" pos="0 -0.0006 0" size="0.005 0 0" group='3' rgba="0 0 0 0"/>
+<!--                            <site name="S_nut_2" pos="-0.012 0.001 0.17" size="0.005 0 0" group='3'/>-->
+                                <geom pos="0 0 0" euler="0 0 1.57" class="screw" mesh="screw" name="screw"/>
+                                <body>
+                                    <site name="S_screw_extension_1" pos="-0.008 0.01 0" size="0.0005 0 0" group='3' rgba="0 0 0 0"/>
+                                    <geom pos="-0.011 0.008 0.0145" euler="0 1.54 0" mesh="semi_cylinder" name="screw_extension_1" class="screw"/>
+                                    <site name="S_screw_extension_2" pos="0.005 0.01 0" size="0.0005 0 0" group='3' rgba="0 0 0 0"/>
+                                    <geom pos="0.01 0.008 -0.0152" euler="0 -1.53 0" mesh="semi_cylinder" name="screw_extension_2" class="screw"/>
+                                </body>
+                            </body>
+                        </body>
+
+                    </body>
+                </body>
+            </body>
+                </body>
+        </body>
+
+            <!-- ======= Adroit ======= -->
+            <include file="../HST.xml"/>
+        </body>
+
+        
+    </worldbody>
+    
+    <actuator>
+        <general name="A_ARTz" joint="ARTz" ctrlrange="-2 2" biastype="affine" gainprm="200 0 0" biasprm="0 -200 0"/>
+<!--        <general name="A_ARRy" joint="ARRy" ctrlrange="0 0.09" biastype="affine" gainprm="600 0 0" biasprm="0 -200 0"/>-->
+<!--        <general name="A_ARRx" joint="ARRx" ctrlrange="0 1" biastype="affine" gainprm="500 0 0" biasprm="0 -500 0"/>-->
+<!--        <general name="A_si_unit" joint="si_unit" ctrlrange="0 3" biastype="affine" gainprm="600 0 0" biasprm="0 -200 0"/>-->
+<!--        <general name="A_ARRz" joint="ARRz" ctrlrange="0 0.6" biastype="affine" gainprm="600 0 0" biasprm="0 -200 0"/>-->
+<!--        <general name="A_screw_around" joint="screw_around" ctrlrange="0 20" biastype="affine" gainprm="500 0 0" biasprm="0 -200 0"/>-->
+<!--        <general name="A_screw_outwards" joint="screw_outwards" ctrlrange="0 50" biastype="affine" gainprm="500 0 0" biasprm="0 -200 0"/>-->
+<!--        <general name="A_ARRx" joint="ARRx" ctrlrange="-.75 .75" biastype="affine" gainprm="500 0 0" biasprm="0 -200 0" />-->
+<!--        <general name="A_ARRy" joint="ARRy" ctrlrange="-.75 .75" biastype="affine" gainprm="500 0 0" biasprm="0 -200 0" />-->
+<!--        <general name="A_ARRz" joint="ARRz" ctrlrange="-1.0 2.0" biastype="affine" gainprm="500 0 0" biasprm="0 -200 0" />-->
+    </actuator>
+    <equality>
+<!--        <joint name="connected_joints" active="true" joint1="screw_around" joint2="screw_outwards" polycoef="0 1000 1000 0 0" />-->
+    </equality>
+    <include file='pull_out_assets.xml'/>
+
+</mujoco>

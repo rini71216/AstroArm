@@ -1,0 +1,201 @@
+ <mujocoinclude>
+     <compiler angle="radian" meshdir='../resources/meshes/' texturedir='../resources/textures/' />
+    <option apirate="200" iterations="20" noslip_iterations="20"/>
+    <size njmax="500" nconmax="100" nstack="600000" nuser_body="9" nuser_jnt="1" nuser_site="1" nuser_tendon="1" nuser_actuator="16" nuser_sensor="1" />
+    <visual>
+        <global offwidth="3024" offheight="1680" />
+        <quality shadowsize="4096" offsamples="8" />
+        <map force="0.1" fogend="5" />
+    </visual>
+    <default class="main">
+        <mesh scale="0.001 0.001 0.001" />
+        <joint limited="true" margin="0.01" armature="0.1"/>
+        <geom friction="1 0.5 0.01" margin="0.0005" />
+<!--        <site size="0.005 0 0" rgba="0.4 0.9 0.4 1" />-->
+        <tendon limited="true" />
+        <general ctrllimited="true" ctrlrange="-1 1" user="0 1 0.03 0.0939711 0.513477 0.0358776 1.23598 8.40409 0.485031 6.04244 1.02187 0.175297 0.121642 0 0 0" />
+        <default class="D_Touch">
+<!--            <site size="0.009 0.004 0.013" group="4" type="box" rgba="0.8 0.8 0.8 0.15" />-->
+            <general user="0 1 0.03 0.0939711 0.513477 0.0358776 1.23598 8.40409 0.485031 6.04244 1.02187 0.175297 0.121642 0 0 0" />
+        </default>
+        <default class="DC_Hand">
+            <geom conaffinity="0" group="4" material="MatColl" />
+            <general user="0 1 0.03 0.0939711 0.513477 0.0358776 1.23598 8.40409 0.485031 6.04244 1.02187 0.175297 0.121642 0 0 0" />
+        </default>
+        <default class="D_Vizual">
+            <geom type="mesh" contype="0" conaffinity="0" group="1" material="MatViz" />
+            <general user="0 1 0.03 0.0939711 0.513477 0.0358776 1.23598 8.40409 0.485031 6.04244 1.02187 0.175297 0.121642 0 0 0" />
+        </default>
+        <default class="Satellite">
+            <geom type="mesh" contype="0" conaffinity="0" group="1" material="MatWood" />
+            <general user="0 1 0.03 0.0939711 0.513477 0.0358776 1.23598 8.40409 0.485031 6.04244 1.02187 0.175297 0.121642 0 0 0" />
+        </default>
+        <default class="bolt">
+            <geom type="mesh" contype="0" conaffinity="0" group="1" material="MatWood" />
+            <general user="0 1 0.03 0.0939711 0.513477 0.0358776 1.23598 8.40409 0.485031 6.04244 1.02187 0.175297 0.121642 0 0 0" />
+        </default>
+        <default class="nut">
+            <geom type="mesh" contype="0" conaffinity="0" group="1" material="MatWood" />
+            <general user="0 1 0.03 0.0939711 0.513477 0.0358776 1.23598 8.40409 0.485031 6.04244 1.02187 0.175297 0.121642 0 0 0" />
+        </default>
+        <default class="screw">
+            <geom type="mesh" contype="0" conaffinity="0" group="1" material="MatWood"/>
+            <general user="0 1 0.03 0.0939711 0.513477 0.0358776 1.23598 8.40409 0.485031 6.04244 1.02187 0.175297 0.121642 0 0 0" />
+        </default>
+        <default class="screw_driver">
+            <geom type="mesh" contype="0" conaffinity="0" group="1" material="MatWood"/>
+            <general user="0 1 0.03 0.0939711 0.513477 0.0358776 1.23598 8.40409 0.485031 6.04244 1.02187 0.175297 0.121642 0 0 0" />
+        </default>
+    </default>
+    <asset>
+        <texture type="cube" name="texgeom" builtin="flat" mark="cross" rgb1="0.3 0.6 0.5" rgb2="0.3 0.6 0.5" width="127" height="762" />
+        <texture type="cube" name="metal" file="metal.png" />
+        <texture type="cube" name="dark_metal" file="dark_metal.png" />
+        <texture type="2d" name="wood2d" file="metal.png" />
+        <texture type="cube" name="square" file="square.png" />
+        <texture type="cube" name="foil" file="silverRaw.png" />
+        <texture type="cube" name="woodb" file="metal.png" />
+        <texture type="2d" name="groundplane" builtin="checker" rgb1="0.2 0.3 0.4" rgb2="0.1 0.2 0.3" width="100" height="100" />
+        <texture type="2d" name="marble2d" file="marble.png" />
+        <texture type="cube" name="marblecube" file="marble.png" />
+        <material name="MatColl" specular="1" shininess="0.3" reflectance="0.5" rgba="0.4 0.5 0.6 1" />
+        <material name="MatViz" specular="0.75" shininess="0.1" reflectance="0.5" texture="dark_metal" />
+        <material name="MatGnd" specular="0.3" shininess="0.3" reflectance="0.3" rgba="0.5 0.55 0.5 1" />
+        <material name="object" texture="texgeom" />
+        <material name="groundplane" texture="groundplane" texrepeat="10 10" />
+        <material name="table2d" texture="marble2d" reflectance="0.3" rgba="0.8 0.8 0.8 1" />
+        <material name="tablecube" texture="marblecube" rgba="0.8 0.8 0.8 1" />
+        <material name="MatFoil" texture="foil" specular="1" shininess="0.3" rgba="0.9 0.9 0.9 1" />
+        <material name="MatPlane" specular="0.3" shininess="0.3" rgba="0.3 0.3 0.2 1" />
+        <material name="MatWood" texture="metal" texrepeat="3 3" specular="0.4" shininess="0.1" />
+        <material name="MatSquare" texture="square" specular="1" shininess="0.6" rgba="0.8 0.8 0.8 1" />
+        <material name="MatWoodR" texture="metal" specular="1" shininess="0.3" rgba="1 0.5 0.5 1" />
+        <material name="MatWoodG" texture="metal" specular="1" shininess="0.3" rgba="0.2 1 0.2 1" />
+        <material name="MatWoodB" texture="woodb" specular="1" shininess="0.3" />
+        <mesh name="forearm_simple" file="forearm_simple.stl" scale="1 1 1"/>
+        <mesh name="wrist" file="wrist.stl" />
+        <mesh name="palm" file="palm.stl" />
+        <mesh name="lfmetacarpal" file="lfmetacarpal.stl" />
+        <mesh name="knuckle" file="knuckle.stl" />
+        <mesh name="TH3_z" file="TH3_z.stl" />
+        <mesh name="TH2_z" file="TH2_z.stl" />
+        <mesh name="TH1_z" file="TH1_z.stl" />
+        <mesh name="Satellite" file="HST2.stl" scale="0.3 0.3 0.3" />
+        <mesh name="bolt" file="factory_bolt_m4_loose.stl" scale="4 4 4"/>
+        <mesh name="nut" file="factory_nut_m4_loose_subdiv_3x.stl" scale="3.5 3.5 3.5"/>
+        <mesh name="screw" file="screw.stl" scale="0.002 0.002 0.002"/>
+        <mesh name="screw_driver" file="screw_driver.stl" scale="0.0008 0.002 0.0009"/>
+        <mesh name="semi_cylinder" file="Semi_Cylinder.stl" scale="0.000245 0.00005 0.0002"/>
+
+
+
+
+
+        <material name="floor_mat" specular="0" shininess="0.5" reflectance="0" rgba="0.2 0.2 0.2 1"/>
+        <material name="table_mat" specular="0" shininess="0.5" reflectance="0" rgba="0.93 0.93 0.93 1"/>
+        <material name="block_mat" specular="0" shininess="0.5" reflectance="0" rgba="0.2 0.2 0.2 1"/>
+        <material name="puck_mat" specular="0" shininess="0.5" reflectance="0" rgba="0.2 0.2 0.2 1"/>
+        <material name="robot0:geomMat" shininess="0.03" specular="0.4"/>
+        <material name="robot0:gripper_finger_mat" shininess="0.03" specular="0.4" reflectance="0"/>
+        <material name="robot0:gripper_mat" shininess="0.03" specular="0.4" reflectance="0"/>
+        <material name="robot0:arm_mat" shininess="0.03" specular="0.4" reflectance="0"/>
+        <material name="robot0:head_mat" shininess="0.03" specular="0.4" reflectance="0"/>
+        <material name="robot0:torso_mat" shininess="0.03" specular="0.4" reflectance="0"/>
+        <material name="robot0:base_mat" shininess="0.03" specular="0.4" reflectance="0"/>
+
+
+        <mesh file="base_link_collision.stl" name="robot0:base_link" scale="0.3 0.3 0.3"/>
+        <mesh file="bellows_link_collision.stl" name="robot0:bellows_link" scale="0.3 0.3 0.3"/>
+        <mesh file="elbow_flex_link_collision.stl" name="robot0:elbow_flex_link" scale="0.5 0.5 0.5"/>
+        <mesh file="estop_link.stl" name="robot0:estop_link" scale="0.3 0.3 0.3"/>
+        <mesh file="forearm_roll_link_collision.stl" name="robot0:forearm_roll_link" scale="0.5 0.5 0.5"/>
+        <mesh file="gripper_link.stl" name="robot0:gripper_link" scale="1 0.3 0.5"/>
+        <mesh file="head_pan_link_collision.stl" name="robot0:head_pan_link" scale="0.3 0.3 0.3"/>
+        <mesh file="head_tilt_link_collision.stl" name="robot0:head_tilt_link" scale="0.3 0.3 0.3"/>
+        <mesh file="l_wheel_link_collision.stl" name="robot0:l_wheel_link" scale="0.3 0.3 0.3"/>
+        <mesh file="laser_link.stl" name="robot0:laser_link" scale="0.3 0.3 0.3"/>
+        <mesh file="r_wheel_link_collision.stl" name="robot0:r_wheel_link" scale="0.3 0.3 0.3"/>
+        <mesh file="torso_lift_link_collision.stl" name="robot0:torso_lift_link" scale="0.3 0.3 0.3"/>
+        <mesh file="shoulder_pan_link_collision.stl" name="robot0:shoulder_pan_link" scale="0.5 0.5 0.5"/>
+        <mesh file="shoulder_lift_link_collision.stl" name="robot0:shoulder_lift_link" scale="0.5 0.5 0.5"/>
+        <mesh file="upperarm_roll_link_collision.stl" name="robot0:upperarm_roll_link" scale="0.5 0.5 0.5"/>
+        <mesh file="wrist_flex_link_collision.stl" name="robot0:wrist_flex_link" scale="0.5 0.5 0.5" />
+        <mesh file="wrist_roll_link_collision.stl" name="robot0:wrist_roll_link" scale="0.3 0.3 0.3"/>
+        <mesh file="torso_fixed_link.stl" name="robot0:torso_fixed_link" scale="0.3 0.3 0.3"/>
+    </asset>
+
+    <contact>
+<!--        So the hand cannot pass through the door-->
+        <pair geom1="gripper_sticks_end_right" geom2="si_unit_handle_1" solimp=".999 .999 .001" solref="0.001 1"></pair>
+        <pair geom1="gripper_sticks_end_left" geom2="si_unit_handle_1" solimp=".999 .999 .001" solref="0.001 1"></pair>
+        <pair geom1="gripper_sticks_end_right" geom2="si_unit_handle_2" solimp=".999 .999 .001" solref="0.001 1"></pair>
+        <pair geom1="gripper_sticks_end_left" geom2="si_unit_handle_2" solimp=".999 .999 .001" solref="0.001 1"></pair>
+        <pair geom1="gripper_sticks_end_right" geom2="si_unit_handle_3" solimp=".999 .999 .001" solref="0.001 1"></pair>
+        <pair geom1="gripper_sticks_end_left" geom2="si_unit_handle_3" solimp=".999 .999 .001" solref="0.001 1"></pair>
+
+        <pair geom1="gripper_sticks_end_right" geom2="si_unit" solimp=".999 .999 .001" solref="0.001 1"></pair>
+        <pair geom1="gripper_sticks_end_left" geom2="si_unit" solimp=".999 .999 .001" solref="0.001 1"></pair>
+
+        <pair geom1="door" geom2="si_unit" solimp=".999 .999 .001" solref="0.001 1"></pair>
+
+    </contact>
+
+     <option noslip_iterations="10" noslip_tolerance="0">
+         <flag multiccd="enable"/>
+     </option>
+
+   <actuator>
+<!--        <general name="A_gripper_right_top" joint="gripper_right_top" ctrlrange="0 0.5" biastype="affine" gainprm="1 0 0" biasprm="0 -1 0" />-->
+        <general name="A_gripper_left" joint="gripper_left" ctrlrange="0 0.5" biastype="affine" gainprm="10 0 0" biasprm="0 -10 0"/>
+        <general name="A_gripper_right" joint="gripper_right" ctrlrange="0 0.5" biastype="affine" gainprm="10 0 0" biasprm="0 -10 0"/>
+<!--       <general name="A_gripper_left_top" joint="gripper_left_top" ctrlrange="0 0.5" biastype="affine" gainprm="1 0 0" biasprm="0 -1 0" />-->
+
+    </actuator>
+
+
+     <equality>
+
+     </equality>
+
+
+<default class="robot0:fetch">
+
+            <default class="robot0:grey">
+                <geom rgba="0.356 0.361 0.376 1.0"></geom>
+            </default>
+            <default class="robot0:blue">
+                <geom rgba="0.086 0.506 0.767 1.0"></geom>
+            </default>
+            <default class="robot0:white">
+                <geom rgba="0.8 0.8 0.8 1"></geom>
+            </default>
+
+            <default class="Silver">
+                <geom material="MatViz" />
+            </default>
+
+
+
+
+
+
+
+<!--            soft gripper-->
+            <!-- CHANGE HERE-->
+        <!-- All changes rearding joint dynamics, box sizes, etc. can be adjusted from here! Digging
+        In XML is not advised/-->
+        <default class="gripper_sticks_main">
+            <geom type="box" size="0.01 0.005 0.02" mass="0.1" contype="1" conaffinity="1" friction="20 0.005 0.0001"/>
+        </default>
+        <default class="gripper_sticks_middle">
+            <geom type="box" size="0.036 0.002 0.015" mass="0.2" contype="1" conaffinity="1" friction="20 0.005 0.0001"/>
+        </default>
+        <default class="gripper_sticks_end">
+            <geom type="box" size="0.02 0.002 0.015" mass="0.1" contype="1" conaffinity="1" friction="20 0.005 0.0001"/>
+        </default>
+
+        <default class="base">
+            <geom type="box" quat="0.7 0.7 0.7 0.7" material="MatViz"/>
+        </default>
+        </default>
+ </mujocoinclude>

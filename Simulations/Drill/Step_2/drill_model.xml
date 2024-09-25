@@ -1,0 +1,77 @@
+<mujocoinclude>
+    <body name="wrist" pos="0 0 0.396">
+        <inertial pos="0.003 0 0.016" quat="0.504234 0.49623 0.49523 0.504234" mass="0.3" diaginertia="0.001 0.001 0.001" />
+        <geom name="V_wrist" class="D_Vizual" mesh="wrist" />
+        <geom name="C_wrist" class="DC_Hand" size="0.015 0.01" quat="0.707107 0.707107 0 0" type="capsule" rgba="0.4 0.5 0.6 0.1" />
+        <body name="palm" pos="0 0 0.034">
+            <inertial pos="0.006 0 0.036" quat="0.715833 0.0439898 0.0749825 0.692839" mass="0.3" diaginertia="0.001 0.001 0.001" />
+<!--            <site name="S_grasp"  type="sphere" rgba="0 0 0 0" size="0.01" pos=".007 -.05 0.07" quat="0.0087 -0.6 -0.0034 -0.81  " />-->
+<!--            <site class="D_Touch" name="Tch_ffmetacarpal" size="0.009 0.004 0.006" pos="0.033 -.008 .078"/>-->
+<!--            <site class="D_Touch" name="Tch_mfmetacarpal" size="0.009 0.004 0.014" pos="0.011 -.008 .074"/>-->
+<!--            <site class="D_Touch" name="Tch_rfmetacarpal" size="0.009 0.004 0.016" pos="-0.011 -.008 .068"/>-->
+<!--            <site class="D_Touch" name="Tch_thmetacarpal" size="0.008 0.004 0.015" pos="0.006 -.008 .042" euler="0 0.57 0"/>-->
+<!--            <site class="D_Touch" name="Tch_palm" size="0.012 0.004 0.016" pos="-0.017 -.008 .024" euler="0 -1 0"/>-->
+
+
+
+
+            <body pos="0 0 0.01" euler="0 -1.6 0" name="robotic_hand">
+                <!-- GRIPPER BASE-->
+                <site name="sBase" pos="0.01 0 0" size="0.005 0 0"/>
+                <geom class="base" size="0.058 0.04 0.01" pos="-0.01 0 0"/>
+                <geom size="0.04 0.03 0.03" pos="-0.05 0 0" type="box" class="Silver"/>
+                <!-- FINGERS LEFT -->
+                <body pos="0 0.74 0">
+                    <body pos="0.01 -0.7 0">
+                        <geom class="gripper_sticks_main" name="g121" />
+                        <body pos="0.05 0 0">
+                            <geom class="gripper_sticks_middle" name="g122"/>
+<!--                            <joint name="gripper_right" range="-0.1 0"/>-->
+                            <site name="s_gripper_right" pos="0 -0.08 0" size="0.005 0 0"/>
+                            <body pos="0.06 -0.01 0">
+                                <geom class="gripper_sticks_end" name="g123" quat="0.2 0 0 1"/>
+<!--                                <joint name="gripper_right_top" range="-0.02 0.4"/>-->
+                                <site name="s_gripper_right_top" pos="0.018 -0.01 0" size="0.005 0 0"/>
+                            </body>
+                        </body>
+                    </body>
+                </body>
+
+<!--                Screw Driver-->
+                <body pos="0.01 -0.001 0.05" name="screw_driver" euler="-0.05 0 0.007">
+                    <geom size="0.00001 0.00001 0.00001" pos="0.1 0 0" type="sphere" friction="1 1 1" rgba="0.5 0.5 0.5 0.5"/>
+                    <body name="drill">
+                        <site name="S_screw_driver" pos="0.264 -0.001 0" size="0.001 0 0" group='3' rgba="0 0 0 0"/>
+                        <geom pos="0.17 0 0" euler="1.55 3.14 0" class="screw_driver" mesh="screw_driver" name="screw_driver"/>
+                        <joint name="screw_driver_joint" pos="0 0 0" axis="-1 0 0" range="0 200" damping="100" stiffness="100" armature="1"/>
+                    </body>
+                    <body>
+                        <body pos="0.13 0 0.0042">
+                            <geom type="box" size="0.041 0.029 0.026" material="MatWood"/>
+                        </body>
+                        <body pos="0.109 0 -0.06">
+                            <geom type="box" size="0.02 0.025 0.04" material="MatWood"/>
+                        </body>
+                    </body>
+                </body>
+
+                <!-- FINGER RIGHT -->
+                <body pos="0 0.66 0">
+                    <body pos="0.01 -0.7 0">
+                        <geom class="gripper_sticks_main" name="g21"/>
+                        <body pos="0.05 0 0">
+                            <geom class="gripper_sticks_middle" name="g22"/>
+<!--                            <joint name="gripper_left" range="0 0.1"/>-->
+                            <site name="s_gripper_left" pos="0 0.08 0" size="0.005 0 0"/>
+                            <body pos="0.06 0.01 0">
+                                <geom class="gripper_sticks_end" name="g23" quat="-0.3 0 0 1"/>
+<!--                                <joint name="gripper_left_top" range="-0.4 0.02"/>-->
+                                <site name="s_gripper_left_top" pos="0.018 0.013 0" size="0.005 0 0"/>
+                            </body>
+                        </body>
+                    </body>
+                </body>
+            </body>
+        </body>
+    </body>
+</mujocoinclude>
